@@ -3,7 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // 移动端菜单切换
     const menuToggle = document.querySelector('.menu-toggle');
     const siteNavigation = document.querySelector('.site-navigation');
+    const header = document.querySelector('.fullscreen-header');
     
+    // 模拟背景图加载完成
+    const bgImage = new Image();
+    bgImage.src = '/images/header-bg.jpg'; // 你的背景图路径
+    
+    bgImage.onload = function() {
+        header.classList.add('loaded');
+    };
     if (menuToggle) {
         menuToggle.addEventListener('click', function() {
             this.classList.toggle('active');

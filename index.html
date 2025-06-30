@@ -1,238 +1,137 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+     <link rel="preload" href="/images/header-bg.jpg" as="image" fetchpriority="high">
+    
+    <!-- 预加载CSS -->
+    <link rel="preload" href="/css/style.css" as="style">
+    
+    <!-- 预加载字体（如果有） -->
+    <link rel="preload" href="/fonts/custom-font.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 其他CSS链接 -->
+    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>見る - 视觉日记</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fonts.css">
+    <title>见名</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 全屏头图容器 */
+        .fullscreen-header {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.3), 
+                rgba(0, 0, 0, 0.3)),
+                url('/images/header-bg.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 主标题样式 */
+        .site-title {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 副标题样式 */
+        .site-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 1rem;
+            max-width: 80%;
+        }
+
+        /* 内容区域 */
+        .content-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 20px;
+            color: #333;
+        }
+
+        .article-list {
+            list-style: none;
+        }
+
+        .article-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 2.5rem;
+            }
+            
+            .site-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="site-branding">
-                <h1 class="site-title"><a href="index.html">見る</a></h1>
-                <p class="site-description">记录每一帧的感动</p>
-            </div>
-            <nav class="site-navigation">
-                <ul>
-                    <li><a href="index.html" class="current">首页</a></li>
-                    <li><a href="about.html">关于</a></li>
-                    <li><a href="gallery.html">画廊</a></li>
-                    <li class="menu-categories">
-                        <a href="#">分类</a>
-                        <ul class="sub-menu">
-                            <li><a href="category.html?tag=Galgame">Galgame</a></li>
-                            <li><a href="category.html?tag=Anime">动画</a></li>
-                            <li><a href="category.html?tag=Manga">漫画</a></li>
-                            <li><a href="category.html?tag=Music">音乐</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <div class="search-toggle">
-                <button class="search-icon"></button>
-                <div class="search-box">
-                    <form role="search" method="get" action="search.html">
-                        <input type="search" placeholder="搜索..." name="s">
-                        <button type="submit">搜索</button>
-                    </form>
-                </div>
-            </div>
-            <button class="menu-toggle">菜单</button>
+    <!-- 全屏头图区域 -->
+    <header class="fullscreen-header">
+        <h1 class="site-title">这份恋情，可以改变世界</h1>
+        <p class="site-subtitle">鹭泽有里咲</p>
+        
+        <!-- 可添加向下滚动指示 -->
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z" fill="white"/>
+            </svg>
         </div>
     </header>
 
-    <div class="featured-post">
-        <div class="featured-post-bg" style="background-image: url('images/backgrounds/featured.jpg')"></div>
-        <div class="featured-post-content">
-            <div class="container">
-                <div class="post-category">Galgame</div>
-                <h2 class="post-title"><a href="post.html">《Summer Pockets》游玩感想 - 海岛的夏日回忆</a></h2>
-                <div class="post-meta">
-                    <time datetime="2023-08-15">2023年8月15日</time>
-                    <span>·</span>
-                    <span>12 min read</span>
-                </div>
-                <a href="post.html" class="read-more">阅读全文</a>
-            </div>
-        </div>
-    </div>
+    <!-- 内容区域 -->
+    <main class="content-section">
+        <h2>游戏</h2>
+        <article>
+            <h3>&lt;Summer Pockets&gt; 游玩感想 - 海岛的夏日回忆</h3>
+            <time>2023年4月15日</time>
+        </article>
 
-    <div class="container">
-        <div class="content-area">
-            <main class="site-main">
-                <h2 class="section-title">最新文章</h2>
-                
-                <article class="post">
-                    <a href="post.html" class="post-thumbnail">
-                        <img src="images/posts/post1.jpg" alt="文章封面">
-                    </a>
-                    <div class="post-content">
-                        <div class="post-category">Galgame</div>
-                        <h3 class="post-title"><a href="post.html">白色相簿2 - 无法传达的爱恋</a></h3>
-                        <div class="post-meta">
-                            <time datetime="2023-07-28">2023年7月28日</time>
-                            <span>·</span>
-                            <span>18 min read</span>
-                        </div>
-                        <p class="post-excerpt">三角恋的极致描写，冬马与雪菜的选择困境。在学园祭的舞台上，北原春希、小木曾雪菜和冬马和纱的命运交织在一起...</p>
-                        <a href="post.html" class="read-more">继续阅读</a>
-                    </div>
-                </article>
-                
-                <article class="post">
-                    <a href="post.html" class="post-thumbnail">
-                        <img src="images/posts/post2.jpg" alt="文章封面">
-                    </a>
-                    <div class="post-content">
-                        <div class="post-category">动画</div>
-                        <h3 class="post-title"><a href="post.html">紫罗兰永恒花园 - 自动手记人偶的故事</a></h3>
-                        <div class="post-meta">
-                            <time datetime="2023-07-10">2023年7月10日</time>
-                            <span>·</span>
-                            <span>15 min read</span>
-                        </div>
-                        <p class="post-excerpt">京阿尼的视觉盛宴，薇尔莉特追寻"爱"为何物的旅程。每封信件背后，都是人心最真挚的情感...</p>
-                        <a href="post.html" class="read-more">继续阅读</a>
-                    </div>
-                </article>
-                
-                <article class="post">
-                    <a href="post.html" class="post-thumbnail">
-                        <img src="images/posts/post3.jpg" alt="文章封面">
-                    </a>
-                    <div class="post-content">
-                        <div class="post-category">漫画</div>
-                        <h3 class="post-title"><a href="post.html">《葬送的芙莉莲》- 穿越千年的旅程</a></h3>
-                        <div class="post-meta">
-                            <time datetime="2023-06-22">2023年6月22日</time>
-                            <span>·</span>
-                            <span>20 min read</span>
-                        </div>
-                        <p class="post-excerpt">勇者死后，精灵魔法使芙莉莲重新踏上旅程，回顾过去与伙伴的点点滴滴。一部关于时间、记忆与告别的杰作...</p>
-                        <a href="post.html" class="read-more">继续阅读</a>
-                    </div>
-                </article>
-                
-                <div class="pagination">
-                    <a href="#" class="prev page-numbers">上一页</a>
-                    <a href="#" class="page-numbers">1</a>
-                    <span class="page-numbers current">2</span>
-                    <a href="#" class="page-numbers">3</a>
-                    <a href="#" class="page-numbers">4</a>
-                    <a href="#" class="next page-numbers">下一页</a>
-                </div>
-            </main>
-            
-            <aside class="site-sidebar">
-                <div class="widget widget-about">
-                    <img src="images/avatars/author.jpg" alt="作者头像" class="author-avatar">
-                    <h3 class="widget-title">关于我</h3>
-                    <p>一名视觉文化爱好者，记录游戏、动画和漫画的体验与思考。相信每一部作品都有值得铭记的瞬间。</p>
-                    <a href="about.html" class="read-more">了解更多</a>
-                </div>
-                
-                <div class="widget widget-categories">
-                    <h3 class="widget-title">分类</h3>
-                    <ul>
-                        <li><a href="category.html?tag=Galgame">Galgame <span>24</span></a></li>
-                        <li><a href="category.html?tag=Anime">动画 <span>18</span></a></li>
-                        <li><a href="category.html?tag=Manga">漫画 <span>15</span></a></li>
-                        <li><a href="category.html?tag=Music">音乐 <span>9</span></a></li>
-                        <li><a href="category.html?tag=Thoughts">随想 <span>7</span></a></li>
-                    </ul>
-                </div>
-                
-                <div class="widget widget-tags">
-                    <h3 class="widget-title">热门标签</h3>
-                    <div class="tagcloud">
-                        <a href="tags.html" class="tag-link">Key社</a>
-                        <a href="tags.html" class="tag-link">京阿尼</a>
-                        <a href="tags.html" class="tag-link">治愈</a>
-                        <a href="tags.html" class="tag-link">泣系</a>
-                        <a href="tags.html" class="tag-link">悬疑</a>
-                        <a href="tags.html" class="tag-link">科幻</a>
-                        <a href="tags.html" class="tag-link">日常</a>
-                        <a href="tags.html" class="tag-link">奇幻</a>
-                    </div>
-                </div>
-                
-                <div class="widget widget-recent-posts">
-                    <h3 class="widget-title">近期文章</h3>
-                    <ul>
-                        <li>
-                            <a href="post.html">《Summer Pockets》游玩感想 - 海岛的夏日回忆</a>
-                            <time datetime="2023-08-15">2023-08-15</time>
-                        </li>
-                        <li>
-                            <a href="post.html">白色相簿2 - 无法传达的爱恋</a>
-                            <time datetime="2023-07-28">2023-07-28</time>
-                        </li>
-                        <li>
-                            <a href="post.html">紫罗兰永恒花园 - 自动手记人偶的故事</a>
-                            <time datetime="2023-07-10">2023-07-10</time>
-                        </li>
-                        <li>
-                            <a href="post.html">《葬送的芙莉莲》- 穿越千年的旅程</a>
-                            <time datetime="2023-06-22">2023-06-22</time>
-                        </li>
-                        <li>
-                            <a href="post.html">CLANNAD - 家族的意义</a>
-                            <time datetime="2023-06-05">2023-06-05</time>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-        </div>
-    </div>
-    
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-widgets">
-                <div class="footer-widget">
-                    <h3 class="widget-title">見る</h3>
-                    <p>记录视觉相关的体验与思考，分享每一份感动。</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link twitter">Twitter</a>
-                        <a href="#" class="social-link weibo">微博</a>
-                        <a href="#" class="social-link bilibili">Bilibili</a>
-                    </div>
-                </div>
-                
-                <div class="footer-widget">
-                    <h3 class="widget-title">分类</h3>
-                    <ul>
-                        <li><a href="category.html?tag=Galgame">Galgame</a></li>
-                        <li><a href="category.html?tag=Anime">动画</a></li>
-                        <li><a href="category.html?tag=Manga">漫画</a></li>
-                        <li><a href="category.html?tag=Music">音乐</a></li>
-                        <li><a href="category.html?tag=Thoughts">随想</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-widget">
-                    <h3 class="widget-title">标签云</h3>
-                    <div class="tagcloud">
-                        <a href="tags.html" class="tag-link">Key社</a>
-                        <a href="tags.html" class="tag-link">京阿尼</a>
-                        <a href="tags.html" class="tag-link">治愈</a>
-                        <a href="tags.html" class="tag-link">泣系</a>
-                        <a href="tags.html" class="tag-link">悬疑</a>
-                        <a href="tags.html" class="tag-link">科幻</a>
-                        <a href="tags.html" class="tag-link">日常</a>
-                        <a href="tags.html" class="tag-link">奇幻</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="site-info">
-                <p>&copy; 2023 見る - 视觉日记 | 由记忆与感动编织而成</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="js/main.js"></script>
-    <script src="js/infinite-scroll.js"></script>
+        <h2>最新文章</h2>
+        <ul class="article-list">
+            <li class="article-item">文章封面</li>
+            <li class="article-item">Gulpme</li>
+            <li class="article-item">白色相簿2 - 无法传达的爱恋</li>
+            <li class="article-item">2023年7月23日</li>
+        </ul>
+    </main>
+
+    <script>
+        // 可选：添加滚动效果
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            window.scrollTo({
+                top: document.querySelector('.content-section').offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>

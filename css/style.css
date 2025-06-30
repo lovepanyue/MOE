@@ -675,6 +675,26 @@ img {
         margin-bottom: 20px;
     }
 }
+/* css/style.css */
+/* ... 原有媒体查询 ... */
+
+/* 新增超小屏幕响应式 */
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+    .site-subtitle {
+        font-size: 0.9rem;
+        padding-top: 0.8rem;
+    }
+    
+    /* 调整滚动指示器大小 */
+    .scroll-indicator svg {
+        width: 24px;
+        height: 24px;
+    }
+}
 
 @media (max-width: 768px) {
     .site-navigation {
@@ -734,4 +754,24 @@ img {
         margin-left: auto;
         margin-right: 15px;
     }
+    /* css/style.css */
+.fullscreen-header {
+    /* 原有样式保持不变... */
+    
+    /* 添加背景主色调作为加载过渡 */
+    background-color: #2c3e50;
+    
+    /* 添加背景图过渡效果 */
+    transition: background-image 0.5s ease;
+    
+    /* 确保伪元素覆盖整个容器 */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 添加加载完成后的动画效果 */
+.fullscreen-header.loaded::before {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
 }

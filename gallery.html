@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画廊 - 見る</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+    <header class="site-header">
+        <!-- 与首页相同的头部 -->
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>视觉画廊</h1>
+            <p>收藏的瞬间与感动</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gallery-filters">
+            <div class="gallery-filter active" data-filter="all">全部</div>
+            <div class="gallery-filter" data-filter="galgame">Galgame</div>
+            <div class="gallery-filter" data-filter="anime">动画</div>
+            <div class="gallery-filter" data-filter="scenery">风景</div>
+            <div class="gallery-filter" data-filter="character">角色</div>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" data-category="galgame">
+                <img src="images/gallery/1.jpg" alt="Summer Pockets CG">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">夏日的记忆</div>
+                    <div class="gallery-date">2023-08-10</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="anime">
+                <img src="images/gallery/2.jpg" alt="紫罗兰永恒花园">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">自动手记人偶</div>
+                    <div class="gallery-date">2023-07-15</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="scenery">
+                <img src="images/gallery/3.jpg" alt="樱花风景">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">樱花坡道</div>
+                    <div class="gallery-date">2023-04-05</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="character">
+                <img src="images/gallery/4.jpg" alt="古河渚">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">团子大家族</div>
+                    <div class="gallery-date">2023-03-20</div>
+                </div>
+            </div>
+            
+            <!-- 更多画廊项目 -->
+        </div>
+        
+        <div class="pagination">
+            <a href="#" class="prev page-numbers">上一页</a>
+            <a href="#" class="page-numbers">1</a>
+            <span class="page-numbers current">2</span>
+            <a href="#" class="page-numbers">3</a>
+            <a href="#" class="page-numbers">4</a>
+            <a href="#" class="next page-numbers">下一页</a>
+        </div>
+    </div>
+    
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img">
+            <div class="lightbox-caption"></div>
+        </div>
+        <button class="lightbox-close">×</button>
+        <button class="lightbox-nav lightbox-prev">❮</button>
+        <button class="lightbox-nav lightbox-next">❯</button>
+    </div>
+    
+    <footer class="site-footer">
+        <!-- 与首页相同的页脚 -->
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

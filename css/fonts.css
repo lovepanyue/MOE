@@ -1,0 +1,41 @@
+/* Google 字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+XiaoWei&display=swap');
+
+/* 图标字体 */
+@font-face {
+    font-family: 'Font Awesome 5 Brands';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("../fonts/fa-brands-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url("../fonts/fa-solid-900.woff2") format("woff2");
+}
+
+/* 图标类 */
+.icon-search:before {
+    content: "\f002";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-twitter:before {
+    content: "\f099";
+    font-family: 'Font Awesome 5 Brands';
+}
+
+.icon-weibo:before {
+    content: "\f18a";
+    font-family: 'Font Awesome 5 Brands';
+}
+
+.icon-bilibili:before {
+    content: "\f167";
+    font-family: 'Font Awesome 5 Brands';
+}

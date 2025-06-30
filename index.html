@@ -1,94 +1,371 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-     <link rel="preload" href="/images/header-bg.jpg" as="image" fetchpriority="high">
-    
-    <!-- 预加载CSS -->
-    <link rel="preload" href="/css/style.css" as="style">
-    
-    <!-- 预加载字体（如果有） -->
-    <link rel="preload" href="/fonts/custom-font.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- 其他CSS链接 -->
-    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>见名</title>
+    <title>见名 - 海岛的夏日回忆</title>
+    <link rel="preload" href="https://source.unsplash.com/random/1920x1080/?ocean,summer,island" as="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 基础样式重置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            color: #fff;
+        }
+        
+        body {
+            color: #333;
+            background: #f9f9f9;
+            line-height: 1.6;
             overflow-x: hidden;
         }
-
-        /* 全屏头图容器 */
+        
+        /* 全屏头图区域 */
         .fullscreen-header {
             position: relative;
             height: 100vh;
             min-height: 600px;
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.3), 
-                rgba(0, 0, 0, 0.3)),
-                url('/images/header-bg.png') center/cover no-repeat;
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+                url('/image/header-bg.png') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
+            color: white;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
         }
-
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
         /* 主标题样式 */
         .site-title {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 300;
-            letter-spacing: 5px;
+            letter-spacing: 8px;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+            animation: slideUp 1s ease-out;
         }
-
+        
         /* 副标题样式 */
         .site-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 300;
             opacity: 0.9;
             margin-bottom: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            padding-top: 1rem;
             max-width: 80%;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+            animation: slideUp 1.2s ease-out;
         }
-
-        /* 内容区域 */
-        .content-section {
-            max-width: 800px;
-            margin: 3rem auto;
+        
+        /* 功能卡片区域 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
-            color: #333;
         }
-
-        .article-list {
-            list-style: none;
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #3498db, #1a5276);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
         .article-item {
             padding: 15px 0;
             border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
         }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
+        
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        
+        .article-icon {
+            margin-right: 15px;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1a5276);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #1a5276);
+            border-radius: 3px;
+        }
+        
+        .game-review {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .game-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .game-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .game-content {
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .game-content p {
+            margin-bottom: 20px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .site-title {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+            }
+            
+            .site-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 600px) {
             .site-title {
                 font-size: 2.5rem;
+                letter-spacing: 3px;
             }
             
             .site-subtitle {
                 font-size: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -96,41 +373,183 @@
 <body>
     <!-- 全屏头图区域 -->
     <header class="fullscreen-header">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <a href="#" class="logo">见名</a>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> 首页</a>
+                <a href="#"><i class="fas fa-gamepad"></i> 游戏</a>
+                <a href="#"><i class="fas fa-book"></i> 文章</a>
+                <a href="#"><i class="fas fa-images"></i> 图库</a>
+                <a href="#"><i class="fas fa-user"></i> 关于</a>
+            </div>
+        </nav>
+        
+        <!-- 主标题和副标题 -->
         <h1 class="site-title">这份恋情，可以改变世界</h1>
         <p class="site-subtitle">鹭泽有里咲</p>
-        
-        <!-- 可添加向下滚动指示 -->
-        <div class="scroll-indicator">
-            <svg width="30" height="30" viewBox="0 0 24 24">
-                <path d="M7 10l5 5 5-5z" fill="white"/>
-            </svg>
-        </div>
     </header>
-
+    
+    <!-- 功能卡片区域 -->
+    <div class="features-grid">
+        <!-- 登录功能卡片 -->
+        <div class="feature-card">
+            <div class="card-header">
+                <i class="fas fa-sign-in-alt"></i> 用户登录
+            </div>
+            <div class="card-content">
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" id="username" placeholder="输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" placeholder="输入密码">
+                    </div>
+                    <button type="submit" class="btn">登录</button>
+                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">
+                        没有账号？<a href="#" style="color: #3498db;">立即注册</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 游戏功能卡片 -->
+        <div class="feature-card">
+            <div class="card-header">
+                <i class="fas fa-gamepad"></i> 游戏中心
+            </div>
+            <div class="card-content">
+                <div class="article-item">
+                    <i class="fas fa-play-circle article-icon"></i>
+                    <span>Summer Pockets 海岛物语</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-play-circle article-icon"></i>
+                    <span>白色相簿2 冬季恋歌</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-play-circle article-icon"></i>
+                    <span>Clannad 家族物语</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-play-circle article-icon"></i>
+                    <span>Air 青空之约</span>
+                </div>
+                <a href="#" class="btn" style="margin-top: 15px; display: block; text-align: center;">
+                    查看所有游戏
+                </a>
+            </div>
+        </div>
+        
+        <!-- 最新文章卡片 -->
+        <div class="feature-card">
+            <div class="card-header">
+                <i class="fas fa-newspaper"></i> 最新文章
+            </div>
+            <div class="card-content">
+                <div class="article-item">
+                    <i class="fas fa-file-alt article-icon"></i>
+                    <span>文章封面设计指南</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-file-alt article-icon"></i>
+                    <span>Gulpme 工具使用心得</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-file-alt article-icon"></i>
+                    <span>白色相簿2 - 无法传达的爱恋</span>
+                </div>
+                <div class="article-item">
+                    <i class="fas fa-file-alt article-icon"></i>
+                    <span>2023年7月23日更新日志</span>
+                </div>
+                <a href="#" class="btn" style="margin-top: 15px; display: block; text-align: center;">
+                    浏览更多文章
+                </a>
+            </div>
+        </div>
+    </div>
+    
     <!-- 内容区域 -->
     <main class="content-section">
-        <h2>游戏</h2>
-        <article>
-            <h3>&lt;Summer Pockets&gt; 游玩感想 - 海岛的夏日回忆</h3>
-            <time>2023年4月15日</time>
-        </article>
-
-        <h2>最新文章</h2>
-        <ul class="article-list">
-            <li class="article-item">文章封面</li>
-            <li class="article-item">Gulpme</li>
-            <li class="article-item">白色相簿2 - 无法传达的爱恋</li>
-            <li class="article-item">2023年7月23日</li>
-        </ul>
+        <h2 class="section-title">游戏</h2>
+        
+        <div class="game-review">
+            <h3 class="game-title">&lt;Summer Pockets&gt; 游玩感想·海岛的夏日回忆</h3>
+            <p class="game-subtitle">2023年4月15日</p>
+            
+            <div class="game-content">
+                <p>《Summer Pockets》是由Key社开发的一款视觉小说游戏，背景设定在一个名为鸟白岛的美丽小岛上。游戏讲述了一位大学生在暑假期间来到岛上，与岛上的少女们相遇并共同度过的温馨夏日故事。</p>
+                
+                <p>游戏通过细腻的文字和精美的画面，生动地描绘了夏日的海岛风光：碧蓝的大海、金色的沙滩、古老的灯塔和郁郁葱葱的森林。玩家可以感受到海风的轻抚、阳光的温暖，仿佛真的置身于这座小岛之上。</p>
+                
+                <p>每个角色都有独特的性格和故事线。从活泼开朗的少女到内向害羞的女孩，从神秘的岛民到活泼的小动物，每个角色都为游戏增添了丰富的色彩。随着故事的推进，玩家将逐渐了解每个角色背后的故事，感受他们的喜怒哀乐。</p>
+                
+                <p>游戏的主题围绕"回忆"展开，探讨了时间、成长和珍贵回忆的主题。在夏日的短暂时光里，主角与岛上的居民们共同创造了无数美好的回忆，这些回忆将成为他们人生中最宝贵的财富。</p>
+                
+                <p>音乐是《Summer Pockets》的另一大亮点。游戏的配乐清新优美，完美地衬托了游戏的氛围。从欢快的日常曲调到感人的剧情配乐，每首曲子都恰到好处地表达了游戏的情感。</p>
+                
+                <p>总的来说，《Summer Pockets》是一款充满夏日气息的治愈系游戏。它不仅带给玩家一段美好的夏日回忆，也让玩家思考生活中真正重要的东西。如果你喜欢温馨感人的故事和美丽的画面，这款游戏绝对值得一试。</p>
+            </div>
+        </div>
     </main>
-
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-bilibili"></i> Bilibili</a>
+                <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+            </div>
+            <p class="copyright">© 2023 见名 · 保留所有权利</p>
+        </div>
+    </footer>
+    
     <script>
-        // 可选：添加滚动效果
-        document.querySelector('.scroll-indicator').addEventListener('click', () => {
-            window.scrollTo({
-                top: document.querySelector('.content-section').offsetTop,
-                behavior: 'smooth'
+        // 添加滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 背景图加载效果
+            const header = document.querySelector('.fullscreen-header');
+            header.style.opacity = '0';
+            
+            setTimeout(() => {
+                header.style.transition = 'opacity 1.5s ease-out';
+                header.style.opacity = '1';
+            }, 100);
+            
+            // 卡片动画效果
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = `opacity 0.8s ease-out ${index * 0.2}s, transform 0.8s ease-out ${index * 0.2}s`;
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 500);
             });
+            
+            // 登录表单交互
+            const loginForm = document.querySelector('.login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // 简单验证
+                    if (username && password) {
+                        alert(`欢迎回来，${username}！登录成功。`);
+                    } else {
+                        alert('请输入用户名和密码！');
+                    }
+                });
+            }
         });
     </script>
 </body>
